@@ -20,7 +20,7 @@ namespace BackEndDeveloperAssessment.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return Redirect("/Students/Index");
         }
 
         public IActionResult Privacy()
