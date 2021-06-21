@@ -22,6 +22,7 @@ namespace BackEndDeveloperAssessment.Controllers
         // GET: Students
         public async Task<IActionResult> Index()
         {
+            ViewBag.Schools = _context.Schools.ToList();
             return View(await _context.Students.ToListAsync());
         }
 
@@ -55,7 +56,7 @@ namespace BackEndDeveloperAssessment.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,Major,IsActive,DateModified")] Student student)
+        public async Task<IActionResult> Create([Bind("Id,FirstName,LastName,SchoolId,Major,IsActive,DateModified")] Student student)
         {
             student.DateModified = DateTime.Now;
             if (ModelState.IsValid)
@@ -121,7 +122,7 @@ namespace BackEndDeveloperAssessment.Controllers
         // GET: Students/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
+            if (id is null)
             {
                 return NotFound();
             }
@@ -137,13 +138,16 @@ namespace BackEndDeveloperAssessment.Controllers
         }
 
         // POST: Students/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpDelete, ActionName("DeleteStudent")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int[] ids)
         {
-            var student = await _context.Students.FindAsync(id);
-            _context.Students.Remove(student);
-            await _context.SaveChangesAsync();
+            foreach (int id in ids)
+            {
+                var student = await _context.Students.FindAsync(id);
+                _context.Students.Remove(student);
+                await _context.SaveChangesAsync();
+            }
             return RedirectToAction(nameof(Index));
         }
 

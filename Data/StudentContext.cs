@@ -17,7 +17,7 @@ namespace BackEndDeveloperAssessment.Data
         public DbSet<School> Schools { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Student>().ToTable("Student");
+            modelBuilder.Entity<Student>().ToTable("Student").HasOne(x => x.School).WithMany().HasForeignKey(x => x.SchoolId);
             modelBuilder.Entity<School>().ToTable("School");
         }
     }

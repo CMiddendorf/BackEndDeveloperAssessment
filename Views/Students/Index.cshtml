@@ -13,13 +13,13 @@
     <thead>
         <tr>
             <th>
-                <input type="checkbox" name="editAllCheckbox" value="unchecked" />
+                <input id="edit-all-checkbox" type="checkbox" name="editAllCheckbox" />
             </th>
             <th>
                 Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.School)
+                @Html.DisplayNameFor(model => model.SchoolId)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Major)
@@ -34,33 +34,61 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @*Edit identifier if I have time.*@
-                <input type="checkbox" name="editCheckbox-@item.Id" value="unchecked" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName), @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.School.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Major)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateModified)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <input type="checkbox" class="checkBox" name="editCheckbox-@item.Id" value="@item.Id" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName), @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.School.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Major)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActive)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateModified)
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+<p>
+    <a id="Delete" href="#">Delete</a>
+</p>
+
+<script>
+    $("#edit-all-checkbox").click(function () {
+        $('input:checkbox.checkBox').not(this).prop('checked', this.checked);
+    });
+    $("#Delete").click(function () {
+        var selectedIDs = new Array();
+        $('input:checkbox.checkBox').each(function () {
+            if ($(this).prop('checked')) {
+                selectedIDs.push($(this).val());
+            }
+        });
+
+        var options = {};
+        options.url = "/Students/DeleteStudent";
+        options.type = "DELETE";
+        options.data = JSON.stringify(selectedIDs);
+        options.contentType = "application/json";
+        options.dataType = "json";
+        options.success = function (msg) {
+            alert(msg);
+        };
+        options.error = function () {
+            alert("Error while deleting the students!");
+        };
+        $.ajax(options);
+
+    });
+</script>

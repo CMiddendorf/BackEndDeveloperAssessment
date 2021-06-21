@@ -16,10 +16,15 @@ namespace BackEndDeveloperAssessment.Models
         [Required]
         public string LastName { get; set; }
         [Required]
+        [Display(Name="School")]
+        public int? SchoolId { get; set; }
         public School School { get; set; }
         [Required]
         public string Major { get; set; }
+        [Display(Name="Active")]
         public Boolean IsActive { get; set; }
+        [Required]
+        [Display(Name="Date Modified")]
         public DateTime DateModified { get; set; }
     }
 }
