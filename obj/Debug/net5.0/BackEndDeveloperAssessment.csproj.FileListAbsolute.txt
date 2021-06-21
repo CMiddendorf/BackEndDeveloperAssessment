@@ -148,3 +148,8 @@ C:\Users\Inani\source\repos\BackEndDeveloperAssessment\BackEndDeveloperAssessmen
 C:\Users\Inani\source\repos\BackEndDeveloperAssessment\BackEndDeveloperAssessment\obj\Debug\net5.0\Razor\Views\Students\Details.cshtml.g.cs
 C:\Users\Inani\source\repos\BackEndDeveloperAssessment\BackEndDeveloperAssessment\obj\Debug\net5.0\Razor\Views\Students\Edit.cshtml.g.cs
 C:\Users\Inani\source\repos\BackEndDeveloperAssessment\BackEndDeveloperAssessment\obj\Debug\net5.0\Razor\Views\Students\Index.cshtml.g.cs
+C:\Users\Inani\source\repos\BackEndDeveloperAssessment\BackEndDeveloperAssessment\obj\Debug\net5.0\Razor\Views\Schools\Create.cshtml.g.cs
+C:\Users\Inani\source\repos\BackEndDeveloperAssessment\BackEndDeveloperAssessment\obj\Debug\net5.0\Razor\Views\Schools\Delete.cshtml.g.cs
+C:\Users\Inani\source\repos\BackEndDeveloperAssessment\BackEndDeveloperAssessment\obj\Debug\net5.0\Razor\Views\Schools\Details.cshtml.g.cs
+C:\Users\Inani\source\repos\BackEndDeveloperAssessment\BackEndDeveloperAssessment\obj\Debug\net5.0\Razor\Views\Schools\Edit.cshtml.g.cs
+C:\Users\Inani\source\repos\BackEndDeveloperAssessment\BackEndDeveloperAssessment\obj\Debug\net5.0\Razor\Views\Schools\Index.cshtml.g.cs

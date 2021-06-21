@@ -8,8 +8,19 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <main id="main-container" role="main" class="pb-3 col-md-12">
-        @RenderBody()
+    <main id="main-container" role="main" class="pb-3 col-md-12 row">
+        <div id="sidebar-container" class="col-md-2" style="background-color:#808080">
+            <h1>Temporary Filler</h1>
+            <div class="row">
+                <a href="../Students/Index">Students</a>
+            </div>
+            <div class="row">
+                <a href="../Schools/Index">Schools</a>
+            </div>
+        </div>
+        <div id="content-container" class="col-md-10">
+            @RenderBody()
+        </div>
     </main>
 
     <footer class="border-top footer text-muted">
