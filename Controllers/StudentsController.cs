@@ -137,10 +137,9 @@ namespace BackEndDeveloperAssessment.Controllers
             return View(student);
         }
 
-        // POST: Students/Delete/5
-        [HttpDelete, ActionName("DeleteStudent")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int[] ids)
+        // DELETE: Students/Delete/5
+        [HttpDelete, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed([FromBody]int[] ids)
         {
             foreach (int id in ids)
             {
@@ -148,7 +147,7 @@ namespace BackEndDeveloperAssessment.Controllers
                 _context.Students.Remove(student);
                 await _context.SaveChangesAsync();
             }
-            return RedirectToAction(nameof(Index));
+            return Ok("Successfully deleted students");
         }
 
         private bool StudentExists(int id)

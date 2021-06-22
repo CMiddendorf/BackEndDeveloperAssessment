@@ -7,8 +7,9 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">Create New</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
@@ -36,7 +37,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+            <tr id="@($"tr{item.Id}")">
                 <td>
                     <input type="checkbox" class="checkBox" name="editCheckbox-@item.Id" value="@item.Id" />
                 </td>
@@ -60,9 +61,7 @@
     </tbody>
 </table>
 
-<p>
-    <a id="Delete" href="#">Delete</a>
-</p>
+<button id="Delete" class="btn btn-primary">Delete</button>
 
 <script>
     $("#edit-all-checkbox").click(function () {
@@ -72,18 +71,21 @@
         var selectedIDs = new Array();
         $('input:checkbox.checkBox').each(function () {
             if ($(this).prop('checked')) {
-                selectedIDs.push($(this).val());
+                selectedIDs.push(parseInt($(this).val()));
             }
         });
 
         var options = {};
-        options.url = "/Students/DeleteStudent";
+        options.url = "@Url.Action("Delete", "Students")";
         options.type = "DELETE";
         options.data = JSON.stringify(selectedIDs);
         options.contentType = "application/json";
         options.dataType = "json";
         options.success = function (msg) {
             alert(msg);
+
+            for (var i = 0; i < selectedIDs.length; i++)
+                $('#tr' + selectedIDs[i]).remove();
         };
         options.error = function () {
             alert("Error while deleting the students!");

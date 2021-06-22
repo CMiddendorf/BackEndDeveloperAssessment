@@ -53,16 +53,18 @@ namespace BackEndDeveloperAssessment.Views
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,Address1,Address2,City,State,ZipCode")] School school)
+        public async Task<IActionResult> Create([FromBody] School school)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(school);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return Ok(school);
             }
-            return View(school);
+
+            return BadRequest(string.Join(", ", ModelState.Values
+                .SelectMany(v => v.Errors)
+                .Select(e => e.ErrorMessage)));
         }
 
         // GET: Schools/Edit/5
